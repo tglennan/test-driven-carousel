@@ -1,5 +1,6 @@
 {
   "name": "test-driven-carousel",
+  "private": true,
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -9,5 +10,12 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "private": true,
+  "devDependencies": {
+    "@babel/core": "^7.2.0",
+    "@babel/preset-env": "^7.2.0",
+    "@babel/preset-react": "^7.0.0"
+  },
+  "dependencies": {
+    "@babel/cli": "^7.2.0"
+  }
 }
