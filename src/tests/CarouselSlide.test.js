@@ -1,7 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import CarouselSlide from '../CarouselSlide';
-import { wrap } from 'module';
 
 describe('CarouselSlide', () => {
   let wrapper;
