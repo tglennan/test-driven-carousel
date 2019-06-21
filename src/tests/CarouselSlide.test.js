@@ -14,6 +14,28 @@ describe('CarouselSlide', () => {
     );
   });
 
+  it('renders correctly', () => {
+    wrapper.setProps({
+      description: 'Descr',
+      attribution: 'Attr',
+    });
+
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('passes other props to the <figure>', () => {
+    const style = {};
+    const onClick = () => {};
+    const className = 'my-carousel-slide';
+
+    wrapper.setProps({ style, onClick, className });
+
+    expect(wrapper.prop('style')).toBe(style);
+    expect(wrapper.prop('onClick')).toBe(onClick);
+    expect(wrapper.prop('className')).toBe(className);
+  });
+
+  // The following tests were removed in favour of the snapshot
   it('Renders a figure', () => {
     expect(wrapper.type()).toEqual('figure');
   });
@@ -38,18 +60,6 @@ describe('CarouselSlide', () => {
 
     expect(wrapper.find('figcaption strong').text()).toBe(description);
   });
-
-  it('passes other props to the <figure>', () => {
-    const style = {};
-    const onClick = () => {};
-    const className = 'my-carousel-slide';
-
-    wrapper.setProps({ style, onClick, className });
-
-    expect(wrapper.prop('style')).toBe(style);
-    expect(wrapper.prop('onClick')).toBe(onClick);
-    expect(wrapper.prop('className')).toBe(className);
-  });
 });
 
 describe('Img', () => {
@@ -63,11 +73,6 @@ describe('Img', () => {
 
   it('renders an <img> with the given src', () => {
     expect(mounted.containsMatchingElement(<img src={imgUrl} />)).toBe(true);
-  });
-
-  it('has the expected static styles', () => {
-    expect(mounted).toHaveStyleRule('width', '100%');
-    expect(mounted).toHaveStyleRule('object-fit', 'cover');
   });
 
   it('uses the imgHeight prop as the height style property', () => {
@@ -90,5 +95,9 @@ describe('Img', () => {
     expect(mounted.find(TestImg)).toHaveStyleRule('width', 'auto');
     expect(mounted.find(TestImg)).toHaveStyleRule('height', 'auto');
     expect(mounted.find(TestImg)).toHaveStyleRule('object-fit', 'fill');
+  });
+
+  it('renders correctly', () => {
+    expect(mounted.find('img')).toMatchSnapshot();
   });
 });

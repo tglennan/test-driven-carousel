@@ -3,6 +3,7 @@ import { shallow } from 'enzyme';
 import Carousel from '../Carousel.js';
 import CarouselButton from '../CarouselButton.js';
 import CarouselSlide from '../CarouselSlide.js';
+import { wrap } from 'module';
 
 describe('Carousel', () => {
   let wrapper;
@@ -112,7 +113,7 @@ describe('Carousel', () => {
   it('allows individual slides to override Img and imgHeight', () => {
     const Img = () => 'test';
     const imgHeight = 1234;
-    wrapper.setProps({ slides: [{ ...slides[0], Img, imgHeight }] });
+    wrapper.setProps({ slides: [{ ...slides[0], Img, imgHeight }, slides[1]] });
     expect(wrapper.find(CarouselSlide).prop('Img')).toBe(Img);
     expect(wrapper.find(CarouselSlide).prop('imgHeight')).toBe(imgHeight);
   });
