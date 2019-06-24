@@ -62,7 +62,8 @@ export default (Component, propName, upperBoundPropName) => {
     }
 
     render() {
-      return <Component {...this.props} />;
+      const { autoAdvanceDelay: _autoAdvanceDelay, ...rest } = this.props;
+      return <Component {...rest} />;
     }
   };
 };

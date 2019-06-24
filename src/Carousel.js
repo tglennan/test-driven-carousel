@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import CarouselButton from './CarouselButton.js';
 import CarouselSlide from './CarouselSlide.js';
 import HasIndex from './HasIndex';
+import AutoAdvances from './AutoAdvances';
 
 export class Carousel extends PureComponent {
   static propTypes = {
@@ -60,4 +61,7 @@ export class Carousel extends PureComponent {
 
 Carousel.propTypes = {};
 
-export default HasIndex(Carousel, 'slideIndex');
+export default HasIndex(
+  AutoAdvances(Carousel, 'slideIndex', 'slides'),
+  'slideIndex'
+);
