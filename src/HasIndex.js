@@ -1,32 +1,77 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-export default (Component, indexPropName) =>
-  class ComponentWithIndex extends React.PureComponent {
+const capitalize = s => `${s[0].toUpperCase()}${s.slice(1)}`;
+
+export default (Component, indexPropName) => {
+  const defaultIndexPropName = `default${capitalize(indexPropName)}`;
+
+  return class ComponentWithIndex extends React.PureComponent {
     static displayName = `HasIndex(${Component.displayName || Component.name})`;
 
-    state = {
-      index: 0,
+    static propTypes = {
+      [indexPropName]: PropTypes.number,
+      [defaultIndexPropName]: PropTypes.number,
+      onIndexChange: PropTypes.func,
     };
 
-    indexIncrement = upperBound => {
-      this.setState(({ index }) => ({
-        index: upperBound && index + 1 > upperBound ? 0 : index + 1,
-      }));
+    static defaultProps = {
+      [defaultIndexPropName]: 0,
     };
 
-    indexDecrement = upperBound => {
-      this.setState(({ index }) => ({
-        index: upperBound && index - 1 < 0 ? upperBound : index - 1,
-      }));
+    static getDerivedStateFromProps(nextProps, prevState) {
+      if (
+        nextProps[indexPropName] !== undefined &&
+        nextProps[indexPropName] !== null &&
+        nextProps[indexPropName] !== prevState.index
+      ) {
+        return { index: nextProps[indexPropName] };
+      }
+
+      return null;
+    }
+
+    constructor(props) {
+      super(props);
+      this.state = {
+        index: props[defaultIndexPropName],
+      };
+    }
+
+    handleIncrement = upperBound => {
+      const { onIndexChange } = this.props;
+      this.setState(({ index }) => {
+        const newIndex = upperBound && index + 1 > upperBound ? 0 : index + 1;
+        if (onIndexChange) {
+          onIndexChange({ target: { value: newIndex } });
+        }
+
+        return { index: newIndex };
+      });
+    };
+
+    handleDecrement = upperBound => {
+      const { onIndexChange } = this.props;
+      this.setState(({ index }) => {
+        const newIndex = upperBound && index - 1 < 0 ? upperBound : index - 1;
+        if (onIndexChange) {
+          onIndexChange({ target: { value: newIndex } });
+        }
+
+        return { index: newIndex };
+      });
     };
 
     render() {
+      const { [defaultIndexPropName]: _defaultIndexProp, ...rest } = this.props;
+
       const indexProps = {
         [indexPropName]: this.state.index,
-        [`${indexPropName}Increment`]: this.indexIncrement,
-        [`${indexPropName}Decrement`]: this.indexDecrement,
+        [`${indexPropName}Increment`]: this.handleIncrement,
+        [`${indexPropName}Decrement`]: this.handleDecrement,
       };
 
-      return <Component {...indexProps} {...this.props} />;
+      return <Component {...rest} {...indexProps} />;
     }
   };
+};
