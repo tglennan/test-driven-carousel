@@ -104,12 +104,12 @@ describe('Carousel', () => {
 
     it('decrements `slideIndex` when prev is clicked', () => {
       wrapper.find('[data-action="prev"]').simulate('click');
-      expect(slideIndexDecrement).toHaveBeenCalledWith(slides.length);
+      expect(slideIndexDecrement).toHaveBeenCalledWith(slides.length - 1);
     });
 
     it('increments `slideIndex` when next is clicked', () => {
       wrapper.find('[data-action="next"]').simulate('click');
-      expect(slideIndexIncrement).toHaveBeenCalledWith(slides.length);
+      expect(slideIndexIncrement).toHaveBeenCalledWith(slides.length - 1);
     });
 
     it('renders the current slide as a CarouselSlide', () => {
