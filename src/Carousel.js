@@ -36,8 +36,8 @@ export class Carousel extends PureComponent {
       defaultImg,
       defaultImgHeight,
       slides,
-      _slideIndexIncrement,
-      _slideIndexDecrement,
+      slideIndexIncrement: _slideIndexIncrement,
+      slideIndexDecrement: _slideIndexDecrement,
       ...rest
     } = this.props;
     return (

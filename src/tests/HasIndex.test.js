@@ -1,7 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import HasIndex from '../HasIndex';
-import { wrap } from 'module';
 
 describe('HasIndex()', () => {
   const MockComponent = () => null;
