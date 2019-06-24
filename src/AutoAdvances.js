@@ -50,7 +50,7 @@ export default (Component, propName, upperBoundPropName) => {
       if (typeof this.props[upperBoundPropName] === 'number') {
         upperBound = this.props[upperBoundPropName];
       } else if (this.props[upperBoundPropName]) {
-        upperBound = this.props[upperBoundPropName].length;
+        upperBound = this.props[upperBoundPropName].length - 1;
       }
 
       this._timer = setTimeout(

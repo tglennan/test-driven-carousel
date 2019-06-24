@@ -14,7 +14,7 @@
     "build": "webpack --config webpack.config.js",
     "dev": "webpack-dev-server --config webpack.config.js --open",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook -o docs"
   },
   "keywords": [],
   "author": "",
@@ -24,6 +24,11 @@
     "@babel/plugin-proposal-class-properties": "^7.1.0",
     "@babel/preset-env": "^7.2.0",
     "@babel/preset-react": "^7.0.0",
+    "@storybook/addon-actions": "^5.1.9",
+    "@storybook/addon-knobs": "^5.1.9",
+    "@storybook/addon-links": "^5.1.9",
+    "@storybook/addons": "^5.1.9",
+    "@storybook/react": "^5.1.9",
     "babel-core": "^7.0.0-bridge.0",
     "babel-eslint": "^10.0.2",
     "babel-jest": "^23.6.0",
@@ -47,11 +52,7 @@
     "stylelint-processor-styled-components": "^1.5.1",
     "webpack": "^4.26.1",
     "webpack-cli": "^3.1.2",
-    "webpack-dev-server": "^3.1.10",
-    "@storybook/react": "^5.1.9",
-    "@storybook/addon-actions": "^5.1.9",
-    "@storybook/addon-links": "^5.1.9",
-    "@storybook/addons": "^5.1.9"
+    "webpack-dev-server": "^3.1.10"
   },
   "dependencies": {
     "@babel/cli": "^7.2.0",
