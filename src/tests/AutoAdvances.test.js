@@ -42,10 +42,10 @@ describe('AutoAdvances()', () => {
     expect(indexIncrement).toHaveBeenCalledWith(upperBound);
   });
 
-  it('uses `upperBound.length` if upperBound is an array', () => {
+  it('uses `upperBound.length - 1` if upperBound is an array', () => {
     wrapper.setProps({ upperBound: [1, 2, 3] });
     jest.advanceTimersByTime(autoAdvanceDelay);
-    expect(indexIncrement).toHaveBeenCalledWith(3);
+    expect(indexIncrement).toHaveBeenCalledWith(2);
   });
 
   it('does not set a timer if `autoAdvanceDelay` ≤ 0', () => {
