@@ -26,8 +26,6 @@ export default (Component, propName, upperBoundPropName) => {
     }
 
     componentDidUpdate(prevProps) {
-      let delta = {};
-
       // see if the slide index was changed, if so reset the timer
       if (
         prevProps[upperBoundPropName] !== this.props[upperBoundPropName] ||

@@ -1,7 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import AutoAdvances from '../AutoAdvances';
-import { wrap } from 'module';
 
 describe('AutoAdvances()', () => {
   const MockComponent = () => null;
