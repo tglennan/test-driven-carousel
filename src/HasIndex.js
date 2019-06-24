@@ -41,7 +41,7 @@ export default (Component, indexPropName) => {
     handleIncrement = upperBound => {
       const { onIndexChange } = this.props;
       this.setState(({ index }) => {
-        const newIndex = upperBound && index + 1 >= upperBound ? 0 : index + 1;
+        const newIndex = upperBound && index + 1 > upperBound ? 0 : index + 1;
         if (onIndexChange) {
           onIndexChange({ target: { value: newIndex } });
         }
@@ -53,7 +53,7 @@ export default (Component, indexPropName) => {
     handleDecrement = upperBound => {
       const { onIndexChange } = this.props;
       this.setState(({ index }) => {
-        const newIndex = upperBound && index - 1 <= 0 ? upperBound : index - 1;
+        const newIndex = upperBound && index - 1 < 0 ? upperBound : index - 1;
         if (onIndexChange) {
           onIndexChange({ target: { value: newIndex } });
         }

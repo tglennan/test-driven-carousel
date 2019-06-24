@@ -23,12 +23,12 @@ export class Carousel extends PureComponent {
 
   handlePrevClick = () => {
     const { slideIndexDecrement, slides } = this.props;
-    slideIndexDecrement(slides.length);
+    slideIndexDecrement(slides.length - 1);
   };
 
   handleNextClick = () => {
     const { slideIndexIncrement, slides } = this.props;
-    slideIndexIncrement(slides.length);
+    slideIndexIncrement(slides.length - 1);
   };
 
   render() {
