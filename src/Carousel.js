@@ -2,13 +2,17 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import CarouselButton from './CarouselButton.js';
 import CarouselSlide from './CarouselSlide.js';
+import HasIndex from './HasIndex';
 
-class Carousel extends PureComponent {
+export class Carousel extends PureComponent {
   static propTypes = {
     slides: PropTypes.arrayOf(PropTypes.shape(CarouselSlide.propTypes))
       .isRequired,
     defaultImgHeight: CarouselSlide.propTypes.imgHeight,
     defaultImg: CarouselSlide.propTypes.Img,
+    slideIndex: PropTypes.number.isRequired,
+    slideIndexIncrement: PropTypes.func.isRequired,
+    slideIndexDecrement: PropTypes.func.isRequired,
   };
 
   static defaultProps = {
@@ -16,32 +20,32 @@ class Carousel extends PureComponent {
     defaultImgHeight: CarouselSlide.defaultProps.imgHeight,
   };
 
-  state = {
-    slideIndex: 0,
-  };
-
   handlePrevClick = () => {
-    const { slides } = this.props;
-    this.setState(({ slideIndex }) => ({
-      slideIndex: (slideIndex + slides.length - 1) % slides.length,
-    }));
+    const { slideIndexDecrement, slides } = this.props;
+    slideIndexDecrement(slides.length);
   };
 
   handleNextClick = () => {
-    const { slides } = this.props;
-    this.setState(({ slideIndex }) => ({
-      slideIndex: (slideIndex + 1) % slides.length,
-    }));
+    const { slideIndexIncrement, slides } = this.props;
+    slideIndexIncrement(slides.length);
   };
 
   render() {
-    const { defaultImg, defaultImgHeight, slides, ...rest } = this.props;
+    const {
+      slideIndex,
+      defaultImg,
+      defaultImgHeight,
+      slides,
+      _slideIndexIncrement,
+      _slideIndexDecrement,
+      ...rest
+    } = this.props;
     return (
       <div {...rest}>
         <CarouselSlide
           Img={defaultImg}
           imgHeight={defaultImgHeight}
-          {...slides[this.state.slideIndex]}
+          {...slides[slideIndex]}
         />
         <CarouselButton data-action="prev" onClick={this.handlePrevClick}>
           Prev
@@ -56,4 +60,4 @@ class Carousel extends PureComponent {
 
 Carousel.propTypes = {};
 
-export default Carousel;
+export default HasIndex(Carousel, 'slideIndex');
